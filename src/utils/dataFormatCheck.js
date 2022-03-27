@@ -15,6 +15,12 @@ const itemSchema = joi.object({
   uhdUrl: joi.string().required().min(10).max(150),
 });
 
+const filterSchema = joi.object({
+  pageSize: joi.number().required().min(1).max(20).integer(),
+  pageNum: joi.number().required().min(1).max(1000).integer(),
+});
+
 module.exports = {
   itemSchema,
+  filterSchema
 };
