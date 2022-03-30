@@ -59,16 +59,25 @@ router.get("/item/get/:date", async (req, res) => {
 
 router.get("/item/tody", async (req, res) => {
   try {
-    const url = await run();
     const date = dayjs().format("YYYY-MM-DD");
-    const item = {
-      date,
-      like: 0,
-      url,
-      uhdUrl: url.replace("1920x1080", "UHD"),
-    };
-    setItemCache(date, item);
-    updateItem(item);
+    let item = getItemCache(date);
+    if (!item) {
+      // 从数据库查是否有今天的数据
+      const _item = await getItemByDate(date);
+      if (_.isEmpty(_item)) {
+        const url = await run();
+        item = {
+          date,
+          like: 0,
+          url,
+          uhdUrl: url.replace("1920x1080", "UHD"),
+        };
+        setItemCache(date, item);
+        updateItem(item);
+      } else {
+        item = _item;
+      }
+    }
     res.json({ status: 200, msg: "success!", result: item });
   } catch (error) {
     console.log("Unable to get today item,", error);
