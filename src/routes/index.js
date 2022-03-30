@@ -2,10 +2,17 @@ const joi = require("joi");
 const express = require("express");
 const { run } = require("../utils/spider");
 const router = express.Router();
-// const { getItemByDateNumber, addOneItem, getItems } = require("../database");
-const { getItemByDate, setItem, getItemsByFilter } = require("../database");
+const _ = require("lodash");
+const {
+  getItemByDate,
+  getAllItems,
+  addItem,
+  getItemsByFilter,
+  updateItem,
+} = require("../database");
 const { getItemCache, setItemCache } = require("../utils/cache");
 const { itemSchema, filterSchema } = require("../utils/dataFormatCheck.js");
+const dayjs = require("dayjs");
 
 router.post("/item/get", async (req, res) => {
   try {
@@ -29,7 +36,19 @@ router.get("/item/get/:date", async (req, res) => {
     if (item === undefined) {
       item = await getItemByDate(date);
       console.log("get item by db:", item);
-      item && setItemCache(item);
+      if (!_.isEmpty(item)) {
+        setItemCache(date, item);
+      } else {
+        const url = await run();
+        item = {
+          date: dayjs().format("YYYY-MM-DD"),
+          like: 0,
+          url,
+          uhdUrl: url.replace("1920x1080", "UHD"),
+        };
+        setItemCache(date, item);
+        addItem(item);
+      }
     }
     res.json({ status: 200, msg: "success...", result: item });
   } catch (error) {
@@ -38,12 +57,35 @@ router.get("/item/get/:date", async (req, res) => {
   }
 });
 
+router.get("/item/tody", async (req, res) => {
+  try {
+    const url = await run();
+    const date = dayjs().format("YYYY-MM-DD");
+    const item = {
+      date,
+      like: 0,
+      url,
+      uhdUrl: url.replace("1920x1080", "UHD"),
+    };
+    setItemCache(date, item);
+    updateItem(item);
+    res.json({ status: 200, msg: "success!", result: item });
+  } catch (error) {
+    console.log("Unable to get today item,", error);
+    res.json({
+      status: 500,
+      msg: "unable to get item at today.sorry.",
+      result: null,
+    });
+  }
+});
+
 router.post("/item/add", async (req, res) => {
   try {
     const { body } = req;
     const { error, value } = itemSchema.validate(body);
     // await addOneItem(body);
-    const msg = await setItem(value);
+    const msg = await addItem(value);
     res.status(200).json({
       status: 200,
       msg: error?.message ?? msg,
