@@ -1,0 +1,7 @@
+name: Bing wallpaper action
+on: [push]
+jobs:
+  Explore-Github-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "开始部署..."
