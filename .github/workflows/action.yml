@@ -10,7 +10,8 @@ jobs:
       - actions/checkout@v2
       # Make sure the @v0.5.4 matches the current version of the
       # action
-      - uses: webfactory/ssh-agent@v0.5.4
+      - name: webfactory/ssh-agent
+        uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Setup known hosts
