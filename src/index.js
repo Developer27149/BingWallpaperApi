@@ -1,4 +1,6 @@
 require("dotenv").config();
+const compression = require("compression");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const { initCache } = require("./utils/cache");
 const express = require("express");
@@ -10,6 +12,10 @@ initCache();
 
 // init app
 const app = express();
+// @ts-ignore
+app.use(compression());
+// @ts-ignore
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(router);
