@@ -19,10 +19,11 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pm2": "^5.2.0"
   },
   "scripts": {
-    "dev": "npx nodemon src/index.js",
-    "build": "npx "
+    "dev": "npx nodemon ./src/index.js",
+    "start": "npx pm2 restart ./src/index.js"
   }
 }

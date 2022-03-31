@@ -7,25 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "数据初始化"
-      - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
+      - actions/checkout@v2
+      # Make sure the @v0.5.4 matches the current version of the
+      # action
+      - uses: webfactory/ssh-agent@v0.5.4
         with:
-          node-version: '16.x'
-      - name: Install npm dependencies
-        run: npm install
-      - name: Run build task 🚀
-        run: npm run build
-      - name: Deploy to server      
-        run: echo "开始部署..."
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: "/dist/", "/node_modules/"
-          ARGS: "-rltgoDzvO"
-          
-
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup known hosts
+        run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
+      - name: Run SSH Commands
+        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn start"
