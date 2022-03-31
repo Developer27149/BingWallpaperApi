@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "数据初始化"
-      - actions/checkout@v2
+      - uses: actions/checkout@v2
       # Make sure the @v0.5.4 matches the current version of the
       # action
       - uses: webfactory/ssh-agent@v0.5.4
