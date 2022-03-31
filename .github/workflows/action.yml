@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "数据初始化"
-      - uses: actions/checkout@v2
+      - actions/checkout@v2
       # Make sure the @v0.5.4 matches the current version of the
       # action
       - uses: webfactory/ssh-agent@v0.5.4
@@ -16,4 +16,4 @@ jobs:
       - name: Setup known hosts
         run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
       - name: Run SSH Commands
-        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn start"
+        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
