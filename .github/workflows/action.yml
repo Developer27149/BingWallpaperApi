@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 开启✿✿ヽ(°▽°)ノ✿
-      - run: echo "数据初始化🔥"    
+      - run: echo "数据初始化🔥"
       # Make sure the @v0.5.4 matches the current version of the
-      action
-      - name: webfactory/ssh-agent
+      # action
+      - name: Init ssh agent
         uses: webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ env.SSH_PRIVATE }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE }}
       - name: Setup known hosts
         run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
       - name: Run SSH Commands
