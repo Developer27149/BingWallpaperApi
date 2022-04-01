@@ -13,8 +13,8 @@ jobs:
       - name: webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ env.SSH_PRIVATE }}
       - name: Setup known hosts
         run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
       - name: Run SSH Commands
-        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
+        run: ssh root@110.42.133.25 "echo '123' > love"
