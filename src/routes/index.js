@@ -3,6 +3,8 @@ const express = require("express");
 const { run } = require("../utils/spider");
 const router = express.Router();
 const _ = require("lodash");
+const axios = require("axios").default;
+
 const {
   getItemByDate,
   getAllItems,
@@ -96,6 +98,31 @@ router.post("/item/add", async (req, res) => {
     res.json({
       status: "500",
       msg: error,
+    });
+  }
+});
+
+router.get("/item/week", async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=10&uhd=1&uhdwidth=3840&uhdheight=2160"
+    );
+    res.json({
+      status: 200,
+      msg: "success",
+      result: data["images"].map((img) => ({
+        url: img.url.replace("/&.*$/", "").replace("UHD", "1920x1080"),
+        uhdUrl: img.url,
+        like: 0,
+        date: dayjs(img.startdate).format("YYYY-MM-DD"),
+        title: img.title,
+      })),
+    });
+  } catch (error) {
+    res.json({
+      status: 500,
+      msg: "Unable to get this week data",
+      result: null,
     });
   }
 });
