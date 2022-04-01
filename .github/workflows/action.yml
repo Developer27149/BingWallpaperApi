@@ -73,6 +73,5 @@ jobs:
           HOST: ${{ env.SSH_HOST }}
           TEST: ${{ secrets.TEST }}
         run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
-        run: |
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. && |        
           echo $HOST $TEST
