@@ -57,7 +57,7 @@ router.get("/item/get/:date", async (req, res) => {
   }
 });
 
-router.get("/item/tody", async (req, res) => {
+router.get("/item/today", async (req, res) => {
   try {
     const date = dayjs().format("YYYY-MM-DD");
     let item = getItemCache(date);
