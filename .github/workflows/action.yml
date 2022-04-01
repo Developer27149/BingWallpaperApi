@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 开启✿✿ヽ(°▽°)ノ✿
-      - run: echo "数据初始化🔥"
+        run: echo "数据初始化🔥"
       # Make sure the @v0.5.4 matches the current version of the
       # action
       - name: Init ssh agent
