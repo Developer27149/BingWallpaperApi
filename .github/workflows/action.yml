@@ -29,9 +29,11 @@
 #       #   run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
 
 name: Bing wallpaper api action
-on: [push]
+on:
+  push: [main]
 jobs:
   Test App:
+    name: job'name is Plan-A
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
