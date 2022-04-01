@@ -70,6 +70,9 @@ jobs:
           FIRST_NAME: Mona
           MIDDLE_NAME: The
           LAST_NAME: Octocat
-          DEMO: ${{ secrets.SSH_HOST }}
+          HOST: ${{ env.SSH_HOST }}
+          TEST: ${{ secrets.TEST }}
         run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME $DEMO.
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+        run: |
+          echo $HOST $TEST
