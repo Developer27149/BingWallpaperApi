@@ -72,8 +72,8 @@ const updateItem = ({ date, like, url, uhdUrl }) => {
       ":u": url,
       ":uhd": uhdUrl,
     },
-    ReturnValues: "UPDATE_NEW",
   };
+  console.log("Now, update a new item", { date, like, url, uhdUrl });
   return client.update(params).promise();
 };
 

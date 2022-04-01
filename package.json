@@ -23,7 +23,7 @@
     "pm2": "^5.2.0"
   },
   "scripts": {
-    "dev": "npx nodemon ./src/index.js",
-    "start": "pm2 restart ./src/index.js --name bing"
+    "dev": "npx nodemon src/index.js",
+    "start": "pm2 restart src/index.js --name bing"
   }
 }

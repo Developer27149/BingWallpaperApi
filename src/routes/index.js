@@ -35,19 +35,10 @@ router.get("/item/get/:date", async (req, res) => {
     let item = getItemCache(date);
     if (item === undefined) {
       item = await getItemByDate(date);
-      console.log("get item by db:", item);
       if (!_.isEmpty(item)) {
         setItemCache(date, item);
       } else {
-        const url = await run();
-        item = {
-          date: dayjs().format("YYYY-MM-DD"),
-          like: 0,
-          url,
-          uhdUrl: url.replace("1920x1080", "UHD"),
-        };
-        setItemCache(date, item);
-        addItem(item);
+        item = null;
       }
     }
     res.json({ status: 200, msg: "success...", result: item });
@@ -65,6 +56,7 @@ router.get("/item/today", async (req, res) => {
       // 从数据库查是否有今天的数据
       const _item = await getItemByDate(date);
       if (_.isEmpty(_item)) {
+        console.log("data not found in aws db");
         const url = await run();
         item = {
           date,
@@ -73,7 +65,7 @@ router.get("/item/today", async (req, res) => {
           uhdUrl: url.replace("1920x1080", "UHD"),
         };
         setItemCache(date, item);
-        updateItem(item);
+        addItem(item);
       } else {
         item = _item;
       }
