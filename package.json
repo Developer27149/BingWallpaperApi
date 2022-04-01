@@ -24,6 +24,6 @@
   },
   "scripts": {
     "dev": "npx nodemon src/index.js",
-    "start": "pm2 restart src/index.js --name bing"
+    "start": "NODE_ENV=production pm2 restart src/index.js --name bing"
   }
 }
