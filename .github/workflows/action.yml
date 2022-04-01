@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "数据初始化"
-      - actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: echo ssh key
         run: echo ${{ secrets.SSH_PRIVATE_KEY }}
       - name: echo ssh host
