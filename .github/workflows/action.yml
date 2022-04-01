@@ -8,13 +8,17 @@ jobs:
     steps:
       - run: echo "数据初始化"
       - actions/checkout@v2
+      - name: test
+        run: echo ${{ secrets.SSH_PRIVATE_KEY }}
+        run: echo ${{ secrets.SSH_HOST }}
+        run: echo ${{ secrets.SSH_USER }}
       # Make sure the @v0.5.4 matches the current version of the
       # action
-      - name: webfactory/ssh-agent
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Setup known hosts
-        run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
-      - name: Run SSH Commands
-        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
+      # - name: webfactory/ssh-agent
+      #   uses: webfactory/ssh-agent@v0.5.4
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      # - name: Setup known hosts
+      #   run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
+      # - name: Run SSH Commands
+      #   run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
