@@ -28,12 +28,18 @@
 #       # - name: Run SSH Commands
 #       #   run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
 
-name: GitHub Actions Demo
+name: Bing wallpaper api action
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Test App:
     runs-on: ubuntu-latest
     steps:
+      - name: get env
+        with: # Set Azure credentials secret as an input
+        credentials: ${{ secrets.SSH_HOST }}
+        env: # Or as an environment variable
+          credentials: ${{ secrets.SSH_USER }}
+      - run: echo "$credentials"
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
