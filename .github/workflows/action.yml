@@ -6,12 +6,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 开启✿✿ヽ(°▽°)ノ✿
-      - run: echo "数据初始化"
-      - name: echo ssh key
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
-      - name: other
-        run: echo " ${{ secrets.SSH_HOST }}"
+      - run: echo "🔥 ${{ secrets.SSH_HOST }}"
+      # - name: 开启✿✿ヽ(°▽°)ノ✿
+      # - run: echo "数据初始化"
+      # - name: echo ssh key
+      #   run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+      # - name: other
+      #   run: echo " ${{ secrets.SSH_HOST }}"
       # - name: echo ssh host
       #   run: echo "${{ secrets.SSH_HOST }}"
       # - name: echo ssh user
