@@ -10,10 +10,12 @@ jobs:
       - run: echo "数据初始化"
       - name: echo ssh key
         run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
-      - name: echo ssh host
-        run: echo "${{ secrets.SSH_HOST }}"
-      - name: echo ssh user
-        run: echo "${{ secrets.SSH_USER }}"
+      - name: other
+        run: echo " ${{ secrets.SSH_HOST }}"
+      # - name: echo ssh host
+      #   run: echo "${{ secrets.SSH_HOST }}"
+      # - name: echo ssh user
+      #   run: echo "${{ secrets.SSH_USER }}"
       # Make sure the @v0.5.4 matches the current version of the
       # action
       # - name: webfactory/ssh-agent
