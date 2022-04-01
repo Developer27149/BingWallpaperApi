@@ -1,76 +1,20 @@
-# name: Bing wallpaper action
-# on:
-#   push:
-#     branches: [main]
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: echo "🔥 ${{ secrets.SSH_HOST }}"
-#       # - name: 开启✿✿ヽ(°▽°)ノ✿
-#       # - run: echo "数据初始化"
-#       # - name: echo ssh key
-#       #   run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
-#       # - name: other
-#       #   run: echo " ${{ secrets.SSH_HOST }}"
-#       # - name: echo ssh host
-#       #   run: echo "${{ secrets.SSH_HOST }}"
-#       # - name: echo ssh user
-#       #   run: echo "${{ secrets.SSH_USER }}"
-#       # Make sure the @v0.5.4 matches the current version of the
-#       # action
-#       # - name: webfactory/ssh-agent
-#       #   uses: webfactory/ssh-agent@v0.5.4
-#       #   with:
-#       #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-#       # - name: Setup known hosts
-#       #   run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
-#       # - name: Run SSH Commands
-#       #   run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
-
-# name: Bing wallpaper api action
-# on:
-#   push:
-#     branches:
-#       - main
-# jobs:
-#   Test App:
-#     name: job'name is Plan-A
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#       - name: init env
-#         env:
-#           SSH_USER: ${{ secrets.SSH_USER }}
-#           SSH_HOST: ${{ secrets.SSH_HOST }}
-#       - name: Check out repository code
-#         uses: actions/checkout@v2
-#       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-#       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#       - name: List files in the repository
-#         run: |
-#           ls ${{ github.workspace }}
-#       - run: echo "🍏 This job's status is ${{ job.status }}."
-#       - run: echo $SSH_USER $SSH_HOST
-#       - run: bash ${{ github.workspace }}/.github/scripts/main.sh
-
-name: Greeting from Mona
-on: push
-
+name: Bing wallpaper action
+on:
+  push:
+    branches: [main]
 jobs:
-  my-job:
-    name: My Job
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Print a greeting
-        env:
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Mona
-          MIDDLE_NAME: The
-          LAST_NAME: Octocat
-          HOST: ${{ env.SSH_HOST }}
-          TEST: ${{ secrets.TEST }}
-        run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. - $HOST - $TEST
+      - name: 开启✿✿ヽ(°▽°)ノ✿
+      - run: echo "数据初始化🔥"    
+      # Make sure the @v0.5.4 matches the current version of the
+      action
+      - name: webfactory/ssh-agent
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+      - name: Setup known hosts
+        run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
+      - name: Run SSH Commands
+        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull && yarn && yarn start"
