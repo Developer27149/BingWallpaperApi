@@ -17,4 +17,4 @@ jobs:
       - name: Setup known hosts
         run: ssh-keyscan 110.42.133.25 >> ~/.ssh/known_hosts
       - name: Run SSH Commands
-        run: ssh root@110.42.133.25 "bash ./BingWallpaperApi/.github/scripts/main.sh"
+        run: ssh root@110.42.133.25 "cd BingWallpaperApi && git pull -f && bash ./.github/scripts/main.sh"
