@@ -30,7 +30,9 @@
 
 name: Bing wallpaper api action
 on:
-  push: [main]
+  push:
+    branches:
+      - main
 jobs:
   Test App:
     name: job'name is Plan-A
