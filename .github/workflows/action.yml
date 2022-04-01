@@ -8,9 +8,11 @@ jobs:
     steps:
       - run: echo "数据初始化"
       - actions/checkout@v2
-      - name: test
+      - name: echo ssh key
         run: echo ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: echo ssh host
         run: echo ${{ secrets.SSH_HOST }}
+      - name: echo ssh user
         run: echo ${{ secrets.SSH_USER }}
       # Make sure the @v0.5.4 matches the current version of the
       # action
