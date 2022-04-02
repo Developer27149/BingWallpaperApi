@@ -4,19 +4,18 @@ on:
     branches: [main]
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-lates
+    env:
+      ssh-host: ${{ secrets.SSH_HOST }}
+      ssh-user: ${{ secrets.SSH_USER }}
     steps:
-      - name: 开启✿✿ヽ(°▽°)ノ✿
-        env:
-          ssh-host: ${{ secrets.SSH_HOST }}
-          ssh-user: ${{ secrets.SSH_USER }}
-      # Make sure the @v0.5.4 matches the current version of the
-      # action
-      - name: Init ssh agent
+      - name: 初始化环境变量
+        run: echo '🔥🔥🔥'
+      - name: 远程命令执行前配置
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE }}
-      - name: Setup known hosts
+      - name: 设置已知 hosts
         run: ssh-keyscan ${ssh-host} >> ~/.ssh/known_hosts
-      - name: Run SSH Commands
+      - name: 执行远程命令
         run: ssh ${ssh-user}@${ssh-host} "cd BingWallpaperApi && git pull -f && bash ./.github/scripts/main.sh"
