@@ -24,6 +24,6 @@
   },
   "scripts": {
     "dev": "npx nodemon src/index.js",
-    "start": "NODE_ENV=production pm2 reload ecosystem.config.js"
+    "start": "NODE_ENV=production && npx pm2 reload ecosystem.config.js"
   }
 }
